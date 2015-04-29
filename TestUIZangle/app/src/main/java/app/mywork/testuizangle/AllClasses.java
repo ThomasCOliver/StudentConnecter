@@ -355,10 +355,10 @@ public class AllClasses extends ActionBarActivity implements View.OnClickListene
         TextView className = new TextView(getBaseContext());
         className.setGravity(Gravity.CENTER_VERTICAL);
         className.setText(cd.getClassName());
-        className.setTextColor(Color.rgb(0, 0, 0));
+        className.setTextColor(Color.rgb(255, 255, 255));
         //set text to 24sp
         className.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-        className.setAlpha(0.50f);
+        className.setAlpha(1.0f);
         className.setSingleLine(true);
         className.setEllipsize(TextUtils.TruncateAt.END);
 
@@ -367,8 +367,8 @@ public class AllClasses extends ActionBarActivity implements View.OnClickListene
         grade.setGravity(Gravity.CENTER_VERTICAL);
         grade.setGravity(Gravity.END);
         grade.setText(cd.getClassGrade());
-        grade.setTextColor(Color.rgb(0, 0, 0));
-        grade.setAlpha(0.50f);
+        grade.setTextColor(Color.rgb(255, 255, 255));
+        grade.setAlpha(1.0f);
         //set text to 24sp
         grade.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         grade.setSingleLine(true);
@@ -398,7 +398,7 @@ public class AllClasses extends ActionBarActivity implements View.OnClickListene
                 TextView assignmentName = new TextView(getBaseContext());
                 assignmentName.setText(cd.getAssignment(i).getAssignmentName());
                 assignmentName.setTextColor(Color.rgb(0, 0, 0));
-                assignmentName.setAlpha(0.50f);
+                assignmentName.setAlpha(0.70f);
                 assignmentName.setSingleLine(true);
                 assignmentName.setEllipsize(TextUtils.TruncateAt.END);
                 assignmentName.setPadding(0, dpToPixel(8), 0, dpToPixel(8));
@@ -408,7 +408,7 @@ public class AllClasses extends ActionBarActivity implements View.OnClickListene
                 TextView assignmentModifiers = new TextView(getBaseContext());
                 assignmentModifiers.setText(cd.getAssignment(i).getModifiers());
                 assignmentModifiers.setTextColor(Color.rgb(0, 0, 0));
-                assignmentModifiers.setAlpha(0.50f);
+                assignmentModifiers.setAlpha(0.70f);
                 assignmentModifiers.setSingleLine(true);
                 assignmentModifiers.setPadding(0, dpToPixel(8), 0, dpToPixel(8));
                 assignmentModifiers.setTypeface(Typeface.DEFAULT_BOLD);
@@ -422,7 +422,7 @@ public class AllClasses extends ActionBarActivity implements View.OnClickListene
 
 
                 assignmentGrade.setTextColor(Color.rgb(0, 0, 0));
-                assignmentGrade.setAlpha(0.50f);
+                assignmentGrade.setAlpha(0.70f);
                 assignmentGrade.setGravity(Gravity.END);
                 assignmentGrade.setSingleLine(true);
                 assignmentGrade.setEllipsize(TextUtils.TruncateAt.END);
@@ -455,7 +455,7 @@ public class AllClasses extends ActionBarActivity implements View.OnClickListene
             TextView noAssignments = new TextView(getBaseContext());
             noAssignments.setText("No assignments to show.");
             noAssignments.setTextColor(Color.rgb(0, 0, 0));
-            noAssignments.setAlpha(0.50f);
+            noAssignments.setAlpha(0.70f);
             noAssignments.setGravity(Gravity.CENTER);
 
             eachAssignmentLinearLayout.addView(noAssignments, noAssignmentParams);

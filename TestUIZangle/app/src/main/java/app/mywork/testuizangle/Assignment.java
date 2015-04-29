@@ -213,4 +213,10 @@ public class Assignment implements Serializable {
     public boolean getFirstTime() {
         return firstTime;
     }
+
+    public String getAllExtras() {
+        String result = "";
+        result += "Date Due: " + getDateDue() + "\nScored As: " + getScoredAs() + "\nComments: " + getComments();
+        return result;
+    }
 }

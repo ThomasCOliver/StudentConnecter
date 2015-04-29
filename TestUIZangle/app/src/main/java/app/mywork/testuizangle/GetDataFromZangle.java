@@ -58,7 +58,7 @@ public class GetDataFromZangle extends IntentService {
                     List<ClassData> classesToNotify = ClassData.toNotify(cdl, newCdl, this);
                     if (classesToNotify != null) {
                         System.out.println("Change and came from alarm");
-                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setContentTitle("Teacher Updated Grade").setContentText("An assignment has been added or deleted.").setSmallIcon(R.drawable.ic_launcher);
+                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setContentTitle("Teacher Updated Grade").setContentText("An assignment has been added or deleted.").setSmallIcon(R.drawable.ic_stat_a);
 
                         // Creates an explicit intent for an Activity in your app
                         Intent resultIntent = new Intent(this, Login.class);

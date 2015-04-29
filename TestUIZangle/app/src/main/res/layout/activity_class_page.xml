@@ -40,7 +40,9 @@
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:gravity="center_vertical"
-                            android:textSize="24sp" />
+                            android:textSize="24sp"
+                            android:alpha="1"
+                            android:textColor="#ffffffff" />
 
                         <TextView
                             android:id="@+id/className"
@@ -49,7 +51,9 @@
                             android:layout_toLeftOf="@id/mainGrade"
                             android:gravity="center_vertical"
                             android:text="Assignments"
-                            android:textSize="24sp" />
+                            android:textSize="24sp"
+                            android:textColor="#ffffffff"
+                            android:alpha="1" />
 
                     </RelativeLayout>
 
@@ -93,7 +97,9 @@
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:text="Class Info"
-                            android:textSize="24sp" />
+                            android:textSize="24sp"
+                            android:alpha="1"
+                            android:textColor="#ffffffff" />
 
                     </RelativeLayout>
 
@@ -113,7 +119,9 @@
                             android:layout_marginBottom="8dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Teacher: " />
+                            android:text="Teacher: "
+                            android:textColor="#ff000000"
+                            android:alpha="0.7" />
 
                         <TextView
                             android:id="@+id/email"
@@ -122,7 +130,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Email: "
-                            android:autoLink="email"/>
+                            android:autoLink="email"
+                            android:textColor="#ff000000"
+                            android:alpha="0.7" />
 
                         <TextView
                             android:id="@+id/website"
@@ -131,7 +141,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Website: "
-                            android:autoLink="web"/>
+                            android:autoLink="web"
+                            android:textColor="#ff000000"
+                            android:alpha="0.7" />
 
 
                     </LinearLayout>

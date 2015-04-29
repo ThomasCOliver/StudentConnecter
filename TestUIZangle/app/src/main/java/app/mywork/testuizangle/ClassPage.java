@@ -24,7 +24,9 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
     LinearLayout.LayoutParams assignmentModifiersParams;
     LinearLayout.LayoutParams assignmentGradeParams;
     LinearLayout.LayoutParams eachAssignmentParams;
+    LinearLayout.LayoutParams eachWholeAssignmentParams;
     LinearLayout.LayoutParams noAssignmentParams;
+    LinearLayout.LayoutParams eachAssignmentExtraParams;
     //declare data for the class
     ClassData cd;
 
@@ -99,7 +101,7 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
                 TextView assignmentName = new TextView(getBaseContext());
                 assignmentName.setText(cd.getAssignment(i).getAssignmentName());
                 assignmentName.setTextColor(Color.rgb(0, 0, 0));
-                assignmentName.setAlpha(0.50f);
+                assignmentName.setAlpha(0.70f);
                 assignmentName.setSingleLine(true);
                 assignmentName.setEllipsize(TextUtils.TruncateAt.END);
                 assignmentName.setPadding(0, dpToPixel(8), 0, dpToPixel(8));
@@ -109,7 +111,7 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
                 TextView assignmentModifiers = new TextView(getBaseContext());
                 assignmentModifiers.setText(cd.getAssignment(i).getModifiers());
                 assignmentModifiers.setTextColor(Color.rgb(0, 0, 0));
-                assignmentModifiers.setAlpha(0.50f);
+                assignmentModifiers.setAlpha(0.70f);
                 assignmentModifiers.setSingleLine(true);
                 assignmentModifiers.setPadding(0, dpToPixel(8), 0, dpToPixel(8));
                 assignmentModifiers.setTypeface(Typeface.DEFAULT_BOLD);
@@ -117,14 +119,19 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
                 //where assignments are placed
                 //add assignment grade, w=match_parent, h=match_parent, right-justify
                 LinearLayout eachAssignmentLinearLayout = new LinearLayout(getBaseContext());
+                //next three lines are new - 4/29/15
+                LinearLayout eachWholeAssignmentLinearLayout = new LinearLayout(getBaseContext());
+                eachWholeAssignmentLinearLayout.setOrientation(LinearLayout.VERTICAL);
+                eachWholeAssignmentLinearLayout.setOnClickListener(this);
+                eachWholeAssignmentLinearLayout.setTag(i);
+
                 TextView assignmentGrade = new TextView(getBaseContext());
 
                 assignmentGrade.setText(cd.getAssignment(i).getPointsEarned() + " /" + cd.getAssignment(i).getPointsPossible());
 
-
                 assignmentGrade.setTextColor(Color.rgb(0, 0, 0));
-                assignmentGrade.setAlpha(0.50f);
-                assignmentGrade.setGravity(Gravity.END);
+                assignmentGrade.setAlpha(0.70f);
+                assignmentGrade.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
                 assignmentGrade.setSingleLine(true);
                 assignmentGrade.setEllipsize(TextUtils.TruncateAt.END);
                 assignmentGrade.setHint(cd.getAssignment(i).getPercentage());
@@ -139,13 +146,22 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
                     assignmentName.setTextColor(Color.rgb(255, 0, 0));
                 }
 
+                TextView restOfData = new TextView(this);
+                restOfData.setText(cd.getAssignment(i).getAllExtras());
+                restOfData.setAlpha(1.0f);
+                restOfData.setVisibility(View.GONE);
+                restOfData.setSingleLine(false);
+
                 //add views in right order
 
                 eachAssignmentLinearLayout.addView(assignmentName, assignmentNameParams);
                 eachAssignmentLinearLayout.addView(assignmentModifiers, assignmentGradeParams);
                 eachAssignmentLinearLayout.addView(assignmentGrade, assignmentGradeParams);
 
-                assignmentLinearLayout.addView(eachAssignmentLinearLayout, eachAssignmentParams);
+                eachWholeAssignmentLinearLayout.addView(eachAssignmentLinearLayout, eachAssignmentParams);
+                eachWholeAssignmentLinearLayout.addView(restOfData, eachAssignmentExtraParams);
+                assignmentLinearLayout.addView(eachWholeAssignmentLinearLayout, eachWholeAssignmentParams);
+
             }
 
         } else    //if now assignments to show
@@ -155,7 +171,7 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
             TextView noAssignments = new TextView(getBaseContext());
             noAssignments.setText("No assignments to show.");
             noAssignments.setTextColor(Color.rgb(0, 0, 0));
-            noAssignments.setAlpha(0.50f);
+            noAssignments.setAlpha(0.80f);
             noAssignments.setGravity(Gravity.CENTER);
 
             eachAssignmentLinearLayout.addView(noAssignments, noAssignmentParams);
@@ -182,8 +198,11 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
 
         noAssignmentParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
+        eachWholeAssignmentParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         eachAssignmentParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        //eachAssignmentParams.setMargins(dpToPixel(0), dpToPixel(8), dpToPixel(0), dpToPixel(8));
+
+        eachAssignmentExtraParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        eachAssignmentExtraParams.setMargins(dpToPixel(8), 0, 0, dpToPixel(8));
 
         noAssignmentParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         noAssignmentParams.setMargins(dpToPixel(0), dpToPixel(8), dpToPixel(0), dpToPixel(8));
@@ -191,12 +210,22 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-
-        //switch grade with percentage or vice versa
-        TextView v = (TextView) view;
-        String buffer = v.getHint().toString();
-        v.setHint(v.getText());
-        v.setText(buffer);
+        //if is new - 4/29/15
+        if (view.getTag() != null) {
+            TextView extras = (TextView)((LinearLayout)view).getChildAt(1);
+            if (extras.getVisibility() == View.VISIBLE) {
+                extras.setVisibility(View.GONE);
+            } else {
+                extras.setVisibility(View.VISIBLE);
+            }
+            //((TextView)(((LinearLayout)(((LinearLayout)view).getChildAt(0))).getChildAt(2))).setText(cd.getAssignment((int)view.getTag()).getPercentage());
+        } else {
+            //switch grade with percentage or vice versa
+            TextView v = (TextView) view;
+            String buffer = v.getHint().toString();
+            v.setHint(v.getText());
+            v.setText(buffer);
+        }
     }
 
     public int dpToPixel(int dp)
