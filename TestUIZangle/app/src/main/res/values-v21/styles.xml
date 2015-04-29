@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="custom_theme_color">#3f51b5</color>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBarTheme</item>
+        <item name="actionBarStyle">@style/MyActionBarTheme</item>
+        <item name="android:colorPrimary">@color/custom_theme_color</item>
+        <item name="colorPrimary">@color/custom_theme_color</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="MyActionBarTheme" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/custom_theme_color</item>
+        <item name="background">@color/custom_theme_color</item>
+    </style>
+
+</resources>

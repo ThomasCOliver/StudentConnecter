@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MyActivity">
+    <item android:id="@+id/action_settings" android:title="Refresh"
+        android:orderInCategory="100" app:showAsAction="never" android:onClick="getDataFromInternet"/>
+    <!--<item android:id="@+id/action_settings2" android:title="Get data from local"
+        android:orderInCategory="100" app:showAsAction="never" android:onClick="getDataFromLocal"/>
+    <item android:id="@+id/action_settings4" android:title="Clear cards"
+        android:orderInCategory="100" app:showAsAction="never" android:onClick="clear"/> -->
+    <item android:id="@+id/action_settings6" android:title="View in browser"
+        android:orderInCategory="100" app:showAsAction="never" android:onClick="browser"/>
+    <item android:id="@+id/action_settings5" android:title="Settings"
+        android:orderInCategory="100" app:showAsAction="never" android:onClick="settings"/>
+    <item android:id="@+id/action_settings3" android:title="Log out"
+        android:orderInCategory="100" app:showAsAction="never" android:onClick="logout"/>
+</menu>

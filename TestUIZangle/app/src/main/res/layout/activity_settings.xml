@@ -1,0 +1,308 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    tools:context="app.mywork.testuizangle.Settings">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/mydivider"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notifications"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/primary_text_light_nodisable" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Receive notifications"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/secondary_text_light" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/notifications"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:checked="true"
+                android:onClick="changeNotifications" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:id="@+id/checkingHowOften"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Check every:"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/primary_text_light_nodisable" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The more you check, the more data is used and more battery used"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/secondary_text_light" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/timing"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:entries="@array/time_arrays"
+                android:prompt="@string/time_prompt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dataUsage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Estimated data usage per month"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/primary_text_light_nodisable" />
+
+            <TextView
+                android:id="@+id/dataCount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text=" MB"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/primary_text_light_nodisable" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:id="@+id/pointLimiter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Limit notifications"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/primary_text_light_nodisable" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Only notify if assignment is worth at least this many points"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/secondary_text_light" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/pointsSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:entries="@array/point_arrays"
+                android:prompt="@string/point_prompt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:id="@+id/percentLimiter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Limit notifications"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/primary_text_light_nodisable" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Only notify if percentage earned is less than this amount"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/secondary_text_light" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/percentSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:entries="@array/percent_arrays"
+                android:prompt="@string/percent_prompt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/multiColor">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Custom colors"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/primary_text_light_nodisable" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Have custom color for each class based on grade"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/secondary_text_light" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/colors"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:checked="true"
+                android:onClick="changeColors" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/openZangleLayout">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Open Zangle in browser"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/primary_text_light_nodisable" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="When viewing in browser, open in default client"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/secondary_text_light" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/openZangle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:checked="true"
+                android:onClick="openInZangle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/reloader">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reload data on app open"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/primary_text_light_nodisable" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="When launching the app, reload the data"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/secondary_text_light" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/autoReloader"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:checked="true"
+                android:onClick="autoReload" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

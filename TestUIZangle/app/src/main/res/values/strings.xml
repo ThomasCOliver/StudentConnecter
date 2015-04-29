@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Login</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Nothing to click here</string>
+    <string name="title_activity_class_page">ClassPage</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="time_prompt">Timing</string>
+
+    <string-array name="time_arrays">
+        <item>0:15</item>
+        <item>0:30</item>
+        <item>1:00</item>
+        <item>2:00</item>
+        <item>3:00</item>
+        <item>6:00</item>
+        <item>12:00</item>
+    </string-array>
+
+    <string name="point_prompt">Always</string>
+
+    <string-array name="point_arrays">
+        <item>Always</item>
+        <item>5 pts</item>
+        <item>10 pts</item>
+        <item>20 pts</item>
+        <item>50 pts</item>
+    </string-array>
+
+    <string name="percent_prompt">60%</string>
+
+    <string-array name="percent_arrays">
+        <item>60%</item>
+        <item>70%</item>
+        <item>80%</item>
+        <item>90%</item>
+        <item>100%</item>
+    </string-array>
+
+    <string name="title_activity_browser_connect">Connect via Browser</string>
+
+</resources>
