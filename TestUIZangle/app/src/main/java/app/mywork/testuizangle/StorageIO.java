@@ -285,4 +285,26 @@ public class StorageIO {
         }
     }
 
+    public static void setOnlyBackgroundWifi(boolean wifi, Context context) {
+        File f = new File(context.getFilesDir() + "/wifi.txt");
+        try {
+            PrintWriter pw = new PrintWriter(f);
+            pw.print(wifi);
+            pw.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static boolean getOnlyBackgroundWifi(Context context) {
+        try {
+            Scanner in = new Scanner(new File(context.getFilesDir() + "/wifi.txt"));
+            boolean returning = Boolean.parseBoolean(in.next());
+            return returning;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
 }

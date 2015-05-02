@@ -19,10 +19,10 @@ import android.widget.TextView;
 
 public class Settings extends ActionBarActivity {
 
-    LinearLayout checkingHowOften, dataUsage, pointsLimiter, percentLimiter;
+    LinearLayout checkingHowOften, dataUsage, pointsLimiter, percentLimiter, backgroundLimiter;
     Spinner timingsSpinner, pointsSpinner, percentSpinner;
     TextView dataCount;
-    CheckBox notifications, colors, inBrowser, reload;
+    CheckBox notifications, colors, inBrowser, reload, background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,8 @@ public class Settings extends ActionBarActivity {
         reload = (CheckBox)findViewById(R.id.autoReloader);
         pointsLimiter = (LinearLayout)findViewById(R.id.pointLimiter);
         percentLimiter = (LinearLayout)findViewById(R.id.percentLimiter);
+        background = (CheckBox)findViewById(R.id.onlyBackground);
+        backgroundLimiter = (LinearLayout)findViewById(R.id.backgroundLimiter);
 
         if (!StorageIO.getMultiColor(this)) {
             colors.setChecked(false);
@@ -56,6 +58,11 @@ public class Settings extends ActionBarActivity {
             reload.setChecked(false);
         } else {
             reload.setChecked(true);
+        }
+        if (!StorageIO.getOnlyBackgroundWifi(this)) {
+            background.setChecked(false);
+        } else {
+            background.setChecked(true);
         }
 
         long period = StorageIO.getPeriod(this);
@@ -204,7 +211,9 @@ public class Settings extends ActionBarActivity {
             percentLimiter.setEnabled(true);
             percentLimiter.setAlpha(1);
             percentSpinner.setEnabled(true);
-
+            backgroundLimiter.setAlpha(1);
+            backgroundLimiter.setEnabled(true);
+            background.setEnabled(true);
             setUpAlarm();
             StorageIO.setAllowNotifications(true, this);
         } else {
@@ -220,6 +229,9 @@ public class Settings extends ActionBarActivity {
             percentLimiter.setEnabled(false);
             percentLimiter.setAlpha(0.3f);
             percentSpinner.setEnabled(false);
+            backgroundLimiter.setAlpha(0.3f);
+            backgroundLimiter.setEnabled(false);
+            background.setEnabled(false);
             StorageIO.setAllowNotifications(false, this);
         }
 
@@ -269,6 +281,15 @@ public class Settings extends ActionBarActivity {
         int period = (int)StorageIO.getPeriod(this);
         mgr.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime()/* + period*/, period, pi);
         System.out.println("Alarm set up");
+    }
+
+    public void backgrounder(View view) {
+        CheckBox background = (CheckBox)view;
+        if (background.isChecked()) {
+            StorageIO.setOnlyBackgroundWifi(true, this);
+        } else {
+            StorageIO.setOnlyBackgroundWifi(false, this);
+        }
     }
 
     public class CheckTimingsOnItemSelectedListener implements AdapterView.OnItemSelectedListener {

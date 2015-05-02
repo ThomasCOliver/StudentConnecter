@@ -3,7 +3,10 @@ package app.mywork.testuizangle;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
@@ -30,9 +33,17 @@ public class GetDataFromZangle extends IntentService {
         File f1 = new File(getFilesDir() + "/password.enc");
         File f2 = new File(getFilesDir() + "/pin.enc");
 
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
         //if there is no password, quit
         if (!f1.exists() ||!f2.exists()) {
             System.out.println("Not logged in");
+            this.stopSelf();
+        }
+        else if(StorageIO.getOnlyBackgroundWifi(this) && !mWifi.isConnected() && intent.getStringExtra(FROM_WHERE).equals(FROM_ALARM)) {
+            //not connected to wifi, only want to do background over wifi, is background connection
+            System.out.println("Only allowed on wifi");
             this.stopSelf();
         }
         else {
