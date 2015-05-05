@@ -1,6 +1,8 @@
 package app.mywork.testuizangle;
 
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -49,6 +51,7 @@ public class AllClasses extends ActionBarActivity implements View.OnClickListene
     List<ClassData> classDataList;
     List<Integer> cardIdList;
 
+    ClipboardManager clipboard;
 
     public int currentLevel;
     WebView wv;
@@ -67,6 +70,7 @@ public class AllClasses extends ActionBarActivity implements View.OnClickListene
         getSupportActionBar().setTitle("Assignments");
         //dark indigo action bar
         //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#1A237E")));
+        clipboard = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
 
         assignLayouts();
 
@@ -402,7 +406,7 @@ public class AllClasses extends ActionBarActivity implements View.OnClickListene
                 assignmentName.setSingleLine(true);
                 assignmentName.setEllipsize(TextUtils.TruncateAt.END);
                 assignmentName.setPadding(0, dpToPixel(8), 0, dpToPixel(8));
-
+                assignmentName.setOnLongClickListener(new LongClick());
 
                 //add modifiers
                 TextView assignmentModifiers = new TextView(getBaseContext());
@@ -809,7 +813,17 @@ public class AllClasses extends ActionBarActivity implements View.OnClickListene
         }
     }
 
-
+    public class LongClick implements View.OnLongClickListener {
+        @Override
+        public boolean onLongClick(View view) {
+            TextView tv = (TextView)view;
+            String data = tv.getText().toString();
+            ClipData clip = ClipData.newPlainText("Assignment Name", data);
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getApplicationContext(), "Moved text to clipboard.", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+    }
 }
 
 

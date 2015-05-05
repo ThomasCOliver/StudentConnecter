@@ -1,5 +1,8 @@
 package app.mywork.testuizangle;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ClassPage extends ActionBarActivity implements View.OnClickListener {
@@ -27,6 +31,8 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
     LinearLayout.LayoutParams eachWholeAssignmentParams;
     LinearLayout.LayoutParams noAssignmentParams;
     LinearLayout.LayoutParams eachAssignmentExtraParams;
+    ClipboardManager clipboard;
+
     //declare data for the class
     ClassData cd;
 
@@ -35,7 +41,8 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_page);
 
-
+        //set up clipboard
+        clipboard = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
         //get data from what sent it here
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -105,6 +112,7 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
                 assignmentName.setSingleLine(true);
                 assignmentName.setEllipsize(TextUtils.TruncateAt.END);
                 assignmentName.setPadding(0, dpToPixel(8), 0, dpToPixel(8));
+                assignmentName.setOnLongClickListener(new LongClick());
 
 
                 //add modifiers
@@ -235,5 +243,17 @@ public class ClassPage extends ActionBarActivity implements View.OnClickListener
         //convert dp to p
         int margin = (int) (dp * d);
         return margin;
+    }
+
+    public class LongClick implements View.OnLongClickListener {
+        @Override
+        public boolean onLongClick(View view) {
+            TextView tv = (TextView)view;
+            String data = tv.getText().toString();
+            ClipData clip = ClipData.newPlainText("Assignment Name", data);
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getApplicationContext(), "Moved text to clipboard.", Toast.LENGTH_SHORT).show();
+            return true;
+        }
     }
 }

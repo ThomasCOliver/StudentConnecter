@@ -52,7 +52,8 @@ public class GetDataFromZangle extends IntentService {
             try {
                 //get credentials and then get HTML from it
                 String[] credentials = StorageIO.readCredentials(this);
-                String response = connection.getHtml(credentials[0], credentials[1]);
+                String district = StorageIO.getDistrict(this);
+                String response = connection.getHtml(credentials[0], credentials[1], district);
 
 
                 File f = new File(getFilesDir().getPath() + "/" + "classData.enc");

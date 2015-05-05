@@ -15,12 +15,12 @@ public class HttpConnection {
     private CookyManager cookyManager;
     private String html;
     
-    public String getHtml(String pin, String password) throws Exception {
+    public String getHtml(String pin, String password, String district) throws Exception {
         cookyManager = new CookyManager();
         sendGet("https://sisweb.resa.net/StudentPortal/default.aspx?id=47010", "");
         sendGet("https://sisweb.resa.net/StudentPortal/", "");
         sendGet("https://sisweb.resa.net/StudentPortal/Home/LoadDistrictNews/News?_=1429013377451", "https://sisweb.resa.net/StudentPortal/");
-        sendPost(pin, password);
+        sendPost(pin, password, district);
         sendGet("https://sisweb.resa.net/StudentPortal/Home/PortalMainPage", "https://sisweb.resa.net/StudentPortal/");
         sendGet("https://sisweb.resa.net/StudentPortal/StudentBanner/SetStudentBanner/", "https://sisweb.resa.net/StudentPortal/Home/PortalMainPage");
         sendGet("https://sisweb.resa.net/StudentPortal/Home/PortalMainPage", "https://sisweb.resa.net/StudentPortal/Home/PortalMainPage");
@@ -104,7 +104,7 @@ public class HttpConnection {
     }
     
     // HTTP POST request
-    private void sendPost(String pin, String password) throws Exception {
+    private void sendPost(String pin, String password, String district) throws Exception {
 
         String url = "https://sisweb.resa.net/StudentPortal/Home/Login";
         URL obj = new URL(url);
@@ -121,7 +121,6 @@ public class HttpConnection {
         con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         con.setRequestProperty("X-Requested-With", "XMLHttpsRequest");
         con.setRequestProperty("Referer", "https://sisweb.resa.net/StudentPortal/");
-        con.setRequestProperty("Content-Length", "46");
         con.setRequestProperty("Pragma", "no-cache");
         con.setRequestProperty("Cache-Control", "no-cache");
         if (cookyManager.getCookys().length() != 0)
@@ -129,7 +128,7 @@ public class HttpConnection {
             con.setRequestProperty("Cookie", cookyManager.getCookys());
         }
 
-        String urlParameters = "districtid=47010&Pin=" + pin + "&Password=" + password;
+        String urlParameters = "districtid=" + district + "&Pin=" + pin + "&Password=" + password;
         //String urlParameters = "districtid=47010&Pin20005361=&Password=olivert";
         
         // Send post request

@@ -166,6 +166,7 @@ public class Login extends ActionBarActivity {
         Intent i = new Intent(this, CheckIdentification.class);
         i.putExtra("PIN", pinText.getText().toString());
         i.putExtra("PASSWORD", passwordText.getText().toString());
+        i.putExtra("DISTRICT", "47010");
         startService(i);
 //        try {
 //            if (pinText.getText().toString().length() == 8 && passwordText.getText().toString().length() != 0) {
@@ -274,6 +275,7 @@ public class Login extends ActionBarActivity {
                 //put in string, save them
                 try {
                     StorageIO.saveCredentials(pinText.getText().toString(), passwordText.getText().toString(), getApplicationContext());
+                    StorageIO.setDistrict("47010", getApplicationContext());
                     //savePasswordInfo(pinText.getText().toString(), passwordText.getText().toString());
                 } catch (Exception e) {
                 }

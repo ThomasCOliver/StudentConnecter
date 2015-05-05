@@ -18,7 +18,7 @@ public class CheckIdentification extends IntentService {
     private static boolean isCorrect = false;
     public static String OUTPUT = "OUTPUT";
     public static String NETWORK_ERROR = "NETWORK_ERROR";
-    private static String pin, password;
+    private static String pin, password, district;
 
     public CheckIdentification() {
         super("CheckIdentification");
@@ -28,6 +28,7 @@ public class CheckIdentification extends IntentService {
     protected void onHandleIntent(Intent intent) {
         pin = intent.getStringExtra("PIN");
         password = intent.getStringExtra("PASSWORD");
+        district = intent.getStringExtra("DISTRICT");
         try {
             sendPost();
 
@@ -72,7 +73,7 @@ public class CheckIdentification extends IntentService {
         con.setRequestProperty("Pragma", "no-cache");
         con.setRequestProperty("Cache-Control", "no-cache");
 
-        String urlParameters = "districtid=47010&Pin=" + pin + "&Password=" + password;
+        String urlParameters = "districtid=" + district + "&Pin=" + pin + "&Password=" + password;
 
         // Send post request
         con.setDoOutput(true);

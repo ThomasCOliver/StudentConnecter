@@ -307,4 +307,26 @@ public class StorageIO {
         }
     }
 
+    public static void setDistrict(String district, Context context) {
+        File f = new File(context.getFilesDir() + "/district.txt");
+        try {
+            PrintWriter pw = new PrintWriter(f);
+            pw.print(district);
+            pw.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static String getDistrict(Context context) {
+        try {
+            Scanner in = new Scanner(new File(context.getFilesDir() + "/district.txt"));
+            String returning = in.next();
+            return returning;
+        } catch (Exception e) {
+            System.out.println(e);
+            return "47010";
+        }
+    }
+
 }
